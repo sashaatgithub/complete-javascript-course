@@ -22,7 +22,7 @@ if (isOldEnough) {
     const yearsLeft = 18 - age;
     console.log(`Sarah is too young. Wait another ${yearsLeft} years :)`);
 }
-*/
+
 
 const birthYear = 1991;
 let century;
@@ -32,3 +32,37 @@ if (birthYear <= 2000) {
     century = 21;
 }
 console.log(century);
+
+
+const inputYear = '1991';
+const inputYearAsNumber = Number(inputYear);
+console.log(inputYearAsNumber + 18);
+console.log('Jonas');
+
+
+const money = 1;
+if (money) {
+    console.log("Don't spend it all");
+} else {
+    console.log("You should get a job!");
+}
+
+let height = 0;
+if (height) {
+    console.log('YAY! Height is defined');
+} else {
+    console.log('Height is UNDEFINED or zero')
+}
+const age = '18';
+const favourite = Number(prompt("What is your favourite number"));
+
+if (favourite === 23) {
+    console.log("Cool! 23 is an amazing number");
+} else if (favourite === 7) {
+    console.log("7 is also an good number")
+} else {
+    console.log("Number is not 23 or 7. Ehh.")
+}
+
+if (favourite !== 23) console.log('Why not 23?!')
+*/
