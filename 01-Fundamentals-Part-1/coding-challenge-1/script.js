@@ -5,15 +5,10 @@ let johnsHeight;
 let mass;
 let height;
 
-mass = marksMass;
-height = marksHeight;
-
 function bmi(mass, height) {
-    const bmi = mass / height ** 2;
+    let bmi = mass / height ** 2;
     return bmi;
 }
-let marksBMI = bmi(marksMass, marksHeight);
-let johnsBMI = bmi(johnsMass, johnsHeight);
 
 function markHigherBMI(marksBMI, otherBMI) {
     if (marksBMI > otherBMI) {
@@ -21,10 +16,13 @@ function markHigherBMI(marksBMI, otherBMI) {
     } else return false;
 }
 
-marksMass = 78;
-marksHeight = 1.69;
-johnsMass = 92;
-johnsHeight = 1.95;
+marksMass = 95;
+marksHeight = 1.88;
+johnsMass = 85;
+johnsHeight = 1.76;
+
+let marksBMI = bmi(marksMass, marksHeight);
+let johnsBMI = bmi(johnsMass, johnsHeight);
 
 console.log(marksBMI);
 console.log(johnsBMI);
