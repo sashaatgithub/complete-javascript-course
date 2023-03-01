@@ -10,12 +10,6 @@ function bmi(mass, height) {
     return bmi;
 }
 
-function markHigherBMI(marksBMI, otherBMI) {
-    if (marksBMI > otherBMI) {
-        return true;
-    } else return false;
-}
-
 marksMass = 95;
 marksHeight = 1.88;
 johnsMass = 85;
@@ -24,19 +18,10 @@ johnsHeight = 1.76;
 let marksBMI = bmi(marksMass, marksHeight);
 let johnsBMI = bmi(johnsMass, johnsHeight);
 
-console.log(marksBMI);
-console.log(johnsBMI);
-console.log(markHigherBMI(marksBMI, johnsBMI));
+if (marksBMI > johnsBMI) {
+    console.log(`Mark's BMI (${marksBMI}) is higher that John's BMI(${johnsBMI})`);
+} else {
+    console.log(`John's BMI (${johnsBMI}) is higher than Mark's BMI (${marksBMI})`);
+}
 
 
-// function logger() {
-//     console.log('My name is Jonas');
-// }
-// logger();
-// function fruitProcessor(apples, oranges) {
-//     console.log(apples, oranges);
-//     const juice = `Juice with ${apples} apples and ${oranges} oranges`;
-//     return juice;
-// };
-
-// fruitProcessor(5, 0)
