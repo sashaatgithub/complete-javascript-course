@@ -66,3 +66,6 @@ if (favourite === 23) {
 
 if (favourite !== 23) console.log('Why not 23?!')
 */
+const age = 3;
+const drink = age >= 18 ? 'wine' : 'water';
+console.log(`I like to drink ${drink}`);
