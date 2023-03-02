@@ -65,7 +65,7 @@ const calcYearsToRetirement = function (birthYear, firstName) {
 }
 
 calcYearsToRetirement('Sasha', 1988);
-*/
+
 
 function percentageOfWorld1(population) {
     return population / 7900 * 100;
@@ -86,3 +86,46 @@ const percentageOfWorld2 = population => population / 7900 * 100;
 console.log(percentageOfWorld2(bulgarianPopulation),
     percentageOfWorld2(russianPopulation),
     percentageOfWorld2(indianPopulation));
+    
+
+const years = new Array(1992, 1984, 2008)
+console.log(friends[0], friends[2], friends.length)
+console.log(friends[friends.length - 1]);
+friends[2] = 'Jay';
+console.log(friends);
+
+const jonas = ['Jonas', 'Schmedtmann', 2037 - 1991, friends]
+console.log(jonas);
+*/
+const friends = ['Michael', 'Steven', 'Steven', 'Peter', 'Peter']
+// const calcAge = function (birthYear) {
+//     return 2037 - birthYear
+// }
+// const years = [1990, 1967, 2002, 2010, 2018];
+// console.log
+
+// const ages = [
+//     calcAge(years[0]),
+//     calcAge(years[1]),
+//     calcAge(years[years.length - 1])
+// ]
+// console.log(ages)
+
+// friends.push("Jay", "Jeo");
+// console.log(friends);
+// friends.unshift('John')
+// friends.pop();
+// console.log(friends)
+// friends.shift(friends);
+console.log(friends.indexOf('Peter'));
+console.log(friends.indexOf('Steven'))
+while (friends.includes('Peter')) {
+    delete friends[friends.indexOf('Peter')]
+}
+console.log(friends);
+
+
+while (friends.includes('Steven')) {
+    friends.splice(friends.indexOf('Steven'), friends.indexOf('Steven'));
+}
+console.log(friends);
