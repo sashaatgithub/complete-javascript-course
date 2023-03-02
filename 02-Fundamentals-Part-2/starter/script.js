@@ -142,7 +142,7 @@ if (jonas[interestedIn]) {
 } else {
     console.log("This is unknown")
 }
-*/
+
 const jonas = {
     firstName: 'Jonas',
     lastName: "Schmedtmann",
@@ -165,3 +165,44 @@ console.log(jonas.calcAge(2022));
 console.log(jonas.age);
 console.log(jonas.toString());
 
+
+for (let rep = 0; rep < 10; rep++) {
+    console.log(`Lifting weights repetition ${rep + 1}`);
+}*/
+
+const types = [];
+const jonasArray = [
+    'Jonas',
+    'Schmedtmann',
+    2037 - 1991,
+    'teacher',
+    ['Michael', 'Peter', 'Steven'],
+    true
+];
+
+// for (let i = 0; i < jonasArray.length; i++) {
+//     if (typeof jonasArray[i] !== 'string') continue;
+//     console.log(jonasArray[i], types.push = typeof jonasArray[i]);
+// }
+// console.log(types);
+
+
+for (let i = jonasArray.length - 1; i >= 0; i--) {
+    console.log(jonasArray[i]);
+}
+
+const exercises = ['squat', 'kangoo jump', 'push up'];
+for (let i = 0; i < exercises.length; i++) {
+    console.log(`---Starting ${exercises[i]}s---`)
+    for (let repetition = 1; repetition <= 5; repetition++) {
+        console.log(`${exercises[i]} repetition ${repetition}`);
+    }
+}
+
+let result = prompt("Roll the dice and type in the value");
+while (Number(result) !== 6) {
+    result = prompt("Roll the dice and type in the value");
+    if (Number(result) === 6) {
+        console.log('Loop is about to end');
+    }
+}
