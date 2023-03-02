@@ -96,27 +96,27 @@ console.log(friends);
 
 const jonas = ['Jonas', 'Schmedtmann', 2037 - 1991, friends]
 console.log(jonas);
-*/
+
 const friends = ['Michael', 'Steven', 'Steven', 'Peter', 'Peter']
-// const calcAge = function (birthYear) {
-//     return 2037 - birthYear
-// }
-// const years = [1990, 1967, 2002, 2010, 2018];
-// console.log
+const calcAge = function (birthYear) {
+    return 2037 - birthYear
+}
+const years = [1990, 1967, 2002, 2010, 2018];
+console.log
 
-// const ages = [
-//     calcAge(years[0]),
-//     calcAge(years[1]),
-//     calcAge(years[years.length - 1])
-// ]
-// console.log(ages)
+const ages = [
+    calcAge(years[0]),
+    calcAge(years[1]),
+    calcAge(years[years.length - 1])
+]
+console.log(ages)
 
-// friends.push("Jay", "Jeo");
-// console.log(friends);
-// friends.unshift('John')
-// friends.pop();
-// console.log(friends)
-// friends.shift(friends);
+friends.push("Jay", "Jeo");
+console.log(friends);
+friends.unshift('John')
+friends.pop();
+console.log(friends)
+friends.shift(friends);
 console.log(friends.indexOf('Peter'));
 console.log(friends.indexOf('Steven'))
 while (friends.includes('Peter')) {
@@ -129,3 +129,39 @@ while (friends.includes('Steven')) {
     friends.splice(friends.indexOf('Steven'), friends.indexOf('Steven'));
 }
 console.log(friends);
+
+console.log(jonas.lastName);
+console.log(jonas['lastName']);
+
+const namekey = 'Name';
+console.log(jonas[`first${namekey}`]);
+
+const interestedIn = prompt('What do you want to know about Jonas? Choose between firstName, lastName,age and friends.');
+if (jonas[interestedIn]) {
+    console.log(jonas[interestedIn]);
+} else {
+    console.log("This is unknown")
+}
+*/
+const jonas = {
+    firstName: 'Jonas',
+    lastName: "Schmedtmann",
+    birthYear: 1991,
+    friends: ['Michael', 'Peter', 'Steven'],
+    job: 'teacher',
+    hasDriverLicense: true,
+    calcAge: function (currentYear) {
+        this.age = currentYear - this.birthYear;
+        return this.age;
+    },
+    toString: function () {
+        return `${this.firstName} is a ${this.age} year-old ${this.job}, and he has ${this.hasDriverLicense ? 'a' : 'no'} driver's license`
+    }
+};
+
+
+console.log(`${jonas.firstName} has ${jonas.friends.length} friends, and his best friend is called ${jonas.friends[0]}.`);
+console.log(jonas.calcAge(2022));
+console.log(jonas.age);
+console.log(jonas.toString());
+
