@@ -1,5 +1,5 @@
 const calcTip = function (bill) {
-    if (50 < bill < 300) {
+    if (bill > 50 && bill < 300) {
         return 0.15 * bill;
     } else {
         return 0.2 * bill;
