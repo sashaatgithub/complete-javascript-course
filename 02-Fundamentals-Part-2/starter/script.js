@@ -40,7 +40,7 @@ function fruitProcessor(apples, oranges) {
     const juice = `Juice with ${applePieces} pieces of apple and ${orangePieces} pieces of orange`
     return juice;
 }
-*/
+
 
 const calcAge = function (birthYear) {
     return new Date().getFullYear() - birthYear;
@@ -65,3 +65,24 @@ const calcYearsToRetirement = function (birthYear, firstName) {
 }
 
 calcYearsToRetirement('Sasha', 1988);
+*/
+
+function percentageOfWorld1(population) {
+    return population / 7900 * 100;
+}
+
+const bulgarianPopulation = 6.8;
+const russianPopulation = 143;
+const indianPopulation = 1380;
+
+const bulgariaAsWorldPercentage = percentageOfWorld1(bulgarianPopulation);
+const russiaAsWorldPercentage = percentageOfWorld1(russianPopulation);
+const indiaAsWorldPercentage = percentageOfWorld1(indianPopulation);
+
+console.log(bulgariaAsWorldPercentage, russiaAsWorldPercentage, indiaAsWorldPercentage)
+
+const percentageOfWorld2 = population => population / 7900 * 100;
+
+console.log(percentageOfWorld2(bulgarianPopulation),
+    percentageOfWorld2(russianPopulation),
+    percentageOfWorld2(indianPopulation));
