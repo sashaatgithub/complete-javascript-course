@@ -81,8 +81,22 @@ const indiaAsWorldPercentage = percentageOfWorld1(indianPopulation);
 
 console.log(bulgariaAsWorldPercentage, russiaAsWorldPercentage, indiaAsWorldPercentage)
 
-const percentageOfWorld2 = population => population / 7900 * 100;
-
+const percentageOfWorld2 = function (population) {
+    return population / 7900 * 100;
+}
 console.log(percentageOfWorld2(bulgarianPopulation),
     percentageOfWorld2(russianPopulation),
     percentageOfWorld2(indianPopulation));
+
+const percentageOfWorld3 = population => population / 7900 * 100;
+
+console.log(percentageOfWorld3(bulgarianPopulation),
+    percentageOfWorld3(russianPopulation),
+    percentageOfWorld3(indianPopulation));
+
+const momsWakeUpTime = function (kidsWakeUpTimes) {
+    return kidsWakeUpTimes.reduce((accumulator, currentValue) =>
+        (accumulator < currentValue ? accumulator : currentValue)) - 15;
+}
+
+console.log(momsWakeUpTime([745, 645]));
