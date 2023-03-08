@@ -1,4 +1,4 @@
-const initialScore = 20;
+const initialScore = 10;
 let secretNumber;
 secretNumber = again();
 score = document.querySelector('.score').textContent;
@@ -17,13 +17,17 @@ function getScore() {
 function checkNumber() {
     const input = document.querySelector('.guess').value;
     let output = document.querySelector('.message');
-    if (!input) {
+    let secret = document.querySelector('.number');
+    if (Number(secret.textContent) === secretNumber) {
+        output.textContent = "You have already won. Press 'again' to restart the game!"
+    } else if (!input) {
         output.textContent = "You need to enter a number!"
     } else if (Number(input) === secretNumber) {
         output.textContent = 'Correct Number! ✨';
         updateHighscore();
         document.querySelector('body').style.backgroundColor = '#60b347';
-        document.querySelector('.number').textContent = secretNumber;
+        secret.style.fontSize = '30 rem'
+        secret.textContent = secretNumber;
     } else {
         updateScore();
         if (Number(input) < Number(secretNumber)) {
@@ -57,6 +61,7 @@ function again() {
     document.querySelector('.message').textContent = 'Start guessing...';
     document.querySelector('.score').textContent = resetScore();
     document.querySelector('body').style.backgroundColor = '#222';
+    document.querySelector('.number').style.fontSize = '15 rem';
     return secretNumber;
 }
 
