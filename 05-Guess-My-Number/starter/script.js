@@ -1,18 +1,29 @@
-let secretNumber = generateNumber1To20();
-document.querySelector('.number').textContent = secretNumber;
+const initialScore = 20;
+let secretNumber;
+secretNumber = again();
+score = document.querySelector('.score').textContent;
 document.querySelector('.check').addEventListener('click', checkNumber);
 document.querySelector('.again').addEventListener('click', again);
 document.querySelector('.reset').addEventListener('click', resetHighscore);
 
+function resetScore() {
+    document.querySelector('.score').textContent = initialScore;
+    return initialScore;
+}
+
+function getScore() {
+    return document.querySelector('.score').textContent;
+}
 function checkNumber() {
     const input = document.querySelector('.guess').value;
-    const secretNumber = document.querySelector('.number').textContent;
     let output = document.querySelector('.message');
     if (!input) {
         output.textContent = "You need to enter a number!"
-    } else if (Number(input) === Number(secretNumber)) {
+    } else if (Number(input) === secretNumber) {
         output.textContent = 'Correct Number! ✨';
         updateHighscore();
+        document.querySelector('body').style.backgroundColor = '#60b347';
+        document.querySelector('.number').textContent = secretNumber;
     } else {
         updateScore();
         if (Number(input) < Number(secretNumber)) {
@@ -22,7 +33,6 @@ function checkNumber() {
         }
     }
 }
-
 function updateScore() {
     document.querySelector('.score').textContent =
         Number(document.querySelector('.score').textContent) - 1;
@@ -42,10 +52,12 @@ function resetHighscore() {
 
 function again() {
     secretNumber = generateNumber1To20();
-    document.querySelector('.number').textContent = secretNumber;
+    document.querySelector('.number').textContent = '?';
     document.querySelector('.guess').value = '';
     document.querySelector('.message').textContent = 'Start guessing...';
-    document.querySelector('.score').textContent = 20;
+    document.querySelector('.score').textContent = resetScore();
+    document.querySelector('body').style.backgroundColor = '#222';
+    return secretNumber;
 }
 
 function generateNumber1To20() {
