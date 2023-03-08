@@ -1,5 +1,5 @@
-let number = Math.trunc(Math.random() * 20) + 1;
-document.querySelector('.number').textContent = number;
+let secretNumber = generateNumber1To20();
+document.querySelector('.number').textContent = secretNumber;
 document.querySelector('.check').addEventListener('click', checkNumber);
 document.querySelector('.again').addEventListener('click', again);
 document.querySelector('.reset').addEventListener('click', resetHighscore);
@@ -41,8 +41,8 @@ function resetHighscore() {
 }
 
 function again() {
-    number = generateNumber1To20();
-    document.querySelector('.number').textContent = number;
+    secretNumber = generateNumber1To20();
+    document.querySelector('.number').textContent = secretNumber;
     document.querySelector('.guess').value = '';
     document.querySelector('.message').textContent = 'Start guessing...';
     document.querySelector('.score').textContent = 20;
