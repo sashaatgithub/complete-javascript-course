@@ -4,8 +4,15 @@ let initialActivePlayerId = 0;
 
 let score0el = document.querySelector('.player--0 > .score');
 let score1el = document.querySelector('.player--1 > .score');
-let currentScore0El = document.getElementById('current--0');
-let currentScore1El = document.getElementById('current--1');
+// let currentScore0El = document.getElementById('current--0');
+// let currentScore1El = document.getElementById('current--1');
+
+let activePlayer = {
+  number: 0,
+  currentScoreEl: document.getElementById(`current--${this.number}`),
+  totalScoreEl: document.getElementById(`score--${this.number}`),
+};
+
 let diceEl = document.querySelector('.dice');
 let btnRoll = document.querySelector('.btn--roll');
 let btnNew = document.querySelector('.btn--new');
