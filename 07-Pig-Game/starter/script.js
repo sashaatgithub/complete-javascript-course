@@ -2,7 +2,6 @@
 let initialScore = 0;
 let initialActivePlayerId = 0;
 
-let playerEls = document.querySelectorAll('.player');
 let score0el = document.querySelector('.player--0 > .score');
 let score1el = document.querySelector('.player--1 > .score');
 let currentScore0El = document.getElementById('current--0');
@@ -17,8 +16,44 @@ score1el.textContent = initialScore;
 diceEl.classList.add('hidden');
 
 btnRoll.addEventListener('click', rollTheDice);
+btnHold.addEventListener('click', keepScore);
+
+function rollTheDice() {
+  let randomScore = generateRandomOneToSix();
+  let dicePicName = `dice-${randomScore}.png`;
+  diceEl.src = dicePicName;
+  diceEl.classList.remove('hidden');
+  let currentScoreEl = document.getElementById(
+    `current--${getActivePlayerNumber()}`
+  );
+  if (randomScore === 1) {
+    currentScoreEl.textContent = 0;
+    setAnotherPlayerActive();
+  } else {
+    addToScore(randomScore, currentScoreEl);
+  }
+}
+
+function keepScore() {
+  let activePlayerNumber = getActivePlayerNumber();
+  let activePlayerCurrentScoreEl = document.getElementById(
+    `current--${activePlayerNumber}`
+  );
+  let scoreToAdd = Number(activePlayerCurrentScoreEl.textContent);
+  activePlayerCurrentScoreEl.textContent = 0;
+  let activePlayerTotalScoreEl = document.querySelector(
+    `#score--${getActivePlayerNumber()}`
+  );
+  addToScore(scoreToAdd, activePlayerTotalScoreEl);
+  setAnotherPlayerActive();
+}
+
+function generateRandomOneToSix() {
+  return Math.trunc(Math.random() * 6) + 1;
+}
 
 function getActivePlayerNumber() {
+  const playerEls = document.querySelectorAll('.player');
   for (let i = 0; i < playerEls.length; i++) {
     if (playerEls[i].classList.contains('player--active')) {
       return i;
@@ -26,30 +61,10 @@ function getActivePlayerNumber() {
   }
   return -1;
 }
-function rollTheDice() {
-  let randomScore = generateRandomOneToSix();
-  let dicePicName = `dice-${randomScore}.png`;
-  diceEl.src = dicePicName;
-  diceEl.classList.remove('hidden');
-  if (randomScore === 1) {
-    setAnotherPlayerActive();
-  } else {
-    addToActivePlayerScore(randomScore);
-  }
 
-  function generateRandomOneToSix() {
-    return Math.trunc(Math.random() * 6) + 1;
-  }
-
-  function addToActivePlayerScore(randomScore) {
-    let activePlayerNumber = getActivePlayerNumber(playerEls);
-    let currentActivePlayerScoreID = `current--${activePlayerNumber}`;
-    let oldActivePlayerScore = Number(
-      document.querySelector(`#${currentActivePlayerScoreID}`).textContent
-    );
-    document.querySelector(`#${currentActivePlayerScoreID}`).textContent =
-      oldActivePlayerScore + randomScore;
-  }
+function addToScore(scoreToAdd, scoreEl) {
+  let oldScore = Number(scoreEl.textContent);
+  scoreEl.textContent = oldScore + scoreToAdd;
 }
 
 /*valid for two players only*/
