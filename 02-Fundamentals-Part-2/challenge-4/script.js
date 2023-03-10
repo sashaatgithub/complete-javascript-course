@@ -24,7 +24,7 @@ console.log(tips, totals);
 // }
 console.log(tips, totals);
 
-function calcAverage(arr) {
+function calcAverage(arr = []) {
   let sum = 0;
   for (let i = 0; i < arr.length; i++) {
     sum += arr[i];
