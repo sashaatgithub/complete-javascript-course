@@ -4,6 +4,7 @@ let initialActivePlayerId = 0;
 
 let score0el = document.querySelector('.player--0 > .score');
 let score1el = document.querySelector('.player--1 > .score');
+
 // let currentScore0El = document.getElementById('current--0');
 // let currentScore1El = document.getElementById('current--1');
 
@@ -12,6 +13,7 @@ let activePlayer = {
   currentScoreEl: document.getElementById(`current--${this.number}`),
   totalScoreEl: document.getElementById(`score--${this.number}`),
 };
+let playing = true;
 
 let diceEl = document.querySelector('.dice');
 let btnRoll = document.querySelector('.btn--roll');
@@ -26,33 +28,37 @@ btnRoll.addEventListener('click', rollTheDice);
 btnHold.addEventListener('click', keepScore);
 
 function rollTheDice() {
-  let randomScore = generateRandomOneToSix();
-  let dicePicName = `dice-${randomScore}.png`;
-  diceEl.src = dicePicName;
-  diceEl.classList.remove('hidden');
-  let currentScoreEl = document.getElementById(
-    `current--${getActivePlayerNumber()}`
-  );
-  if (randomScore === 1) {
-    currentScoreEl.textContent = 0;
-    setAnotherPlayerActive();
-  } else {
-    addToScore(randomScore, currentScoreEl);
+  if (playing) {
+    let randomScore = generateRandomOneToSix();
+    let dicePicName = `dice-${randomScore}.png`;
+    diceEl.src = dicePicName;
+    diceEl.classList.remove('hidden');
+    let currentScoreEl = document.getElementById(
+      `current--${getActivePlayerNumber()}`
+    );
+    if (randomScore === 1) {
+      currentScoreEl.textContent = 0;
+      setAnotherPlayerActive();
+    } else {
+      addToScore(randomScore, currentScoreEl);
+    }
   }
 }
 
 function keepScore() {
-  let activePlayerNumber = getActivePlayerNumber();
-  let activePlayerCurrentScoreEl = document.getElementById(
-    `current--${activePlayerNumber}`
-  );
-  let scoreToAdd = Number(activePlayerCurrentScoreEl.textContent);
-  activePlayerCurrentScoreEl.textContent = 0;
-  let activePlayerTotalScoreEl = document.querySelector(
-    `#score--${getActivePlayerNumber()}`
-  );
-  addToScore(scoreToAdd, activePlayerTotalScoreEl);
-  setAnotherPlayerActive();
+  if (playing) {
+    let activePlayerNumber = getActivePlayerNumber();
+    let activePlayerCurrentScoreEl = document.getElementById(
+      `current--${activePlayerNumber}`
+    );
+    let scoreToAdd = Number(activePlayerCurrentScoreEl.textContent);
+    activePlayerCurrentScoreEl.textContent = 0;
+    let activePlayerTotalScoreEl = document.querySelector(
+      `#score--${getActivePlayerNumber()}`
+    );
+    addToScore(scoreToAdd, activePlayerTotalScoreEl);
+    setAnotherPlayerActive();
+  }
 }
 
 function generateRandomOneToSix() {
@@ -80,7 +86,7 @@ function setAnotherPlayerActive() {
   console.log(activePlayerNumber);
   document
     .querySelector(`.player--${activePlayerNumber}`)
-    .classList.remove('player--active');
+    .classList.toggle('player--active');
   let numberOfPlayerToActivate;
   activePlayerNumber === 0
     ? (numberOfPlayerToActivate = 1)
@@ -88,7 +94,7 @@ function setAnotherPlayerActive() {
   let playerToActivateClass = `player--${numberOfPlayerToActivate}`;
   document
     .querySelector(`.${playerToActivateClass}`)
-    .classList.add('player--active');
+    .classList.toggle('player--active');
 }
 
 // const score0 = document.querySelector('#score--0');
