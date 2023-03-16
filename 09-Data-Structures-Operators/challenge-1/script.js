@@ -43,42 +43,39 @@ const game = {
   scored: ["Lewandowski", "Gnarby", "Lewandowski", "Hummels"],
 };
 
-const scorers = {
-  whoScored: [],
-  goals: [],
-};
+let scorers = {};
 
+// instead of creating two arrays, just give the object properties dynamically.
 let gameScorers = game.scored;
 for (let i = 0; i < gameScorers.length; i++) {
-  console.log(scorers.whoScored.findIndex((it) => it === gameScorers[i]));
-  scorers.whoScored.includes(gameScorers[i])
-    ? scorers.goals[
-        scorers.whoScored.findIndex((it) => it === gameScorers[i])
-      ]++
-    : scorers.whoScored.push(gameScorers[i]) && scorers.goals.push(1);
+  if (!scorers?.[gameScorers[i]]) {
+    scorers[gameScorers[i]] = 1
+  } else {
+    scorers[gameScorers[i]]++;
+  }
 }
 console.log(scorers);
 
-let {
-  team1,
-  odds: { team1: team1Odds },
-} = game;
+// let {
+//   team1,
+//   odds: { team1: team1Odds },
+// } = game;
 
-let team1Info = [team1, team1Odds];
+// let team1Info = [team1, team1Odds];
 
-let {
-  team2,
-  odds: { team2: team2Odds },
-} = game;
+// let {
+//   team2,
+//   odds: { team2: team2Odds },
+// } = game;
 
-let team2Info = [team2, team2Odds];
+// let team2Info = [team2, team2Odds];
 
-let infos = [team1Info, team2Info];
-for (let [teamName, odd] of infos) {
-  console.log(`Odd of victory of ${teamName} is ${odd}`);
-}
+// let infos = [team1Info, team2Info];
+// for (let [teamName, odd] of infos) {
+//   console.log(`Odd of victory of ${teamName} is ${odd}`);
+// }
 
-console.log(`Odd of draw is ${game?.odds?.x ?? "unknown"}`);
+// console.log(`Odd of draw is ${game?.odds?.x ?? "unknown"}`);
 // ({
 //   odds: { team1 },
 // } = game);
