@@ -40,10 +40,33 @@ const game = {
   },
 };
 
-const { players } = game;
-console.log(players);
-const [players1, players2] = players;
-console.log(players1);
+// const { players } = game;
+// console.log(players);
+// const [players11, players12] = players;
+// console.log(players11);
 
-const { players: [players11, players21] } = game;
-console.log(players11);
+//Hurray for the below
+const { players: [players1, players2] } = game;
+console.log(players1);
+const [gk, ...fieldPlayers] = players1;
+console.log(fieldPlayers);
+
+const allPlayers = [...players1, ...players2];
+console.log(allPlayers);
+
+const players1Final = [...players1, 'Thiago', 'Coutinho', 'Perisic'];
+console.log(players1Final);
+
+const { team1, x: draw, team2 } = game.odds;
+console.log(draw);
+
+function printGoals(...names) {
+  console.log(...names, names.length);
+}
+printGoals('Davies', 'Muller', 'Lewandowski', 'Kimmich')
+
+console.log(team1);
+
+for (const player of players1) console.log(player);
+for (const [i, element] of players1.entries()) console.log(i);
+
