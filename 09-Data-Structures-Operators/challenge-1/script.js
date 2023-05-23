@@ -107,3 +107,4 @@ console.log(scorers);
 // for (let [numb, playerName] of game?.scored.entries()) {
 //   console.log(`Goal ${Number(numb) + 1}: ${playerName}`);
 // }
+console.log('kjh');

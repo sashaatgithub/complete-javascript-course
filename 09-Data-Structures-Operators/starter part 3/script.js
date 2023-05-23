@@ -52,3 +52,16 @@ rest.set(2, 'Lisbon, Portugal').set('open', 12).set('close', 22).set(true, 'We a
 console.log(rest.get('name'))
 let timeNow = 11;
 console.log(rest.get(timeNow >= rest.get('open') && timeNow < rest.get('close')));
+rest.delete(2);
+console.log(rest.size);
+
+rest.set(document.querySelector('h1'), 'Heading');
+console.log(rest);
+const question = new Map([
+  ['question', 'What language are we learning?'],
+  [1, 'C'],
+  [2, 'Java'],
+  [3, 'JavaScript'],
+  ['correct', 3],
+  [true, 'Correct'],
+]);
