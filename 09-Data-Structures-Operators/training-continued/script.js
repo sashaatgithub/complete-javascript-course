@@ -23,7 +23,10 @@ for (const [key, value] of question) {
 }
 
 const answer = Number(
-  prompt('Enter the number of the correct answer here. ' + hintText)
+  prompt(
+    'What language are we learning? Enter the number of the correct answer here. ' +
+      hintText
+  )
 );
 
 question.get('msgText').textContent = question.get(
