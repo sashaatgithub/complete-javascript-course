@@ -116,3 +116,18 @@ currencies.forEach(function (value, key, map) {
 });
 // For maps we should use a throw-away value _
 /////////////////////////////////////////////////
+const greet = function (greeting) {
+  return function (name) {
+    console.log(`${greeting}, ${name}`);
+  };
+};
+// const greeterHey:(name: any) => void
+const greeterHey = greet('Hey');
+greeterHey('Jonas');
+greeterHey('Sasha');
+
+greet('Hello and be happy')('Sasha');
+
+const greeter = greeting => shortName =>
+  console.log(`${greeting}, ${shortName}`);
+greeter('Wake up')('Sasha');
