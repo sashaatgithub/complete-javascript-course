@@ -1,5 +1,43 @@
 'use strict';
 
+let arr = ['a', 'b', 'c', 'd', 'e'];
+let slice = arr.slice(2, 4);
+console.log(slice, arr);
+
+// SPLICE  actually mutates the original array
+// arr.splice(-1) deletes the last element. The second argument of splice is  the number of elements
+
+let arr2 = arr.reverse();
+console.log(arr.reverse());
+
+// bracket notation can be replaced by the at method
+console.log(arr[arr.length - 1]);
+console.log(arr.slice(-1));
+console.log(arr.at(-1));
+// it allows nethod chaining and also works on strings.
+
+const movements1 = [200, 450, -400, 3000, -650, -130, 70, 1300];
+// for (const movement1 of movements1) {
+// for(const [i, movement] of movements1.entries())
+//   if (movement1 > 0) {
+//     console.log(`You deposited ${movement1}`);
+//   } else {
+//     console.log(`You withdrew ${Math.abs(movement1)}`);
+//   }
+// }
+
+// the order of the parameters is important
+movements1.forEach(function (movement, index, array) {
+  if (movement > 0) {
+    console.log(`You deposited ${movement}`);
+  } else {
+    console.log(`You withdrew ${Math.abs(movement)}`);
+  }
+});
+
+// It's notpossible to break out of a for-each loop
+
+//  PaymentMethodChangeEvent.
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
 // BANKIST APP
@@ -73,4 +111,8 @@ const currencies = new Map([
 
 const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 
+currencies.forEach(function (value, key, map) {
+  console.log(`${key}:${value}`);
+});
+// For maps we should use a throw-away value _
 /////////////////////////////////////////////////
