@@ -30,4 +30,4 @@ Person.prototype.calcAge = function () {
 console.log(jack.calcAge());
 
 // Person.prototype is not the prototype of Person, but for all the instances
-// We can set a property on a prototype, but it won't be 'own property
+// We can set a property on a prototype, but it won't be 'own' property
