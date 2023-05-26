@@ -51,3 +51,5 @@ transformer('And sdkjhf', oneWord);
 // Callback functions are important because they allow for abstraction.
 
 // addEvenListener is a higher-order function;
+// JS doesn't support classes as such, as blueprints
+// OOP principles Abstraction, Encapsulation, Inheritance and Polymorphism improve class design

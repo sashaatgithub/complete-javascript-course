@@ -1,1 +1,33 @@
 'use strict';
+
+// OOP in JS : each object has a prototype. Each object has method
+// Prototypal inheritance: instances inherit sprperties from "classes" (prototypes). Behaviour is delegated to the prototype
+
+// 1 - Constructor functions - Arrays
+// ES6 classes are just a layer of abstraction over constructor functions
+// Constructor function needs a this, so it should be a function expression
+
+const Person = function (firstName, birthYear) {
+  (this.firstName = firstName), (this.birthYear = birthYear);
+};
+// new -> empty object is created 2) this is linked to the empty object
+// 3) this is linked to the prototype 4)automatically returns the object which doesn't have to be empty
+
+const jonas = new Person('Jonas', 1991);
+const jack = new Person('Jack', 1975);
+// Constructor functions simulate classes
+console.log(jonas instanceof Person);
+
+// never create a method inside a constructor function. Functions should be reused, not instantiated.
+
+// Constructor function is a pattern, not a JS language features
+// Every function has a prototype property, the prototype function too. And we can add methods to it.
+
+Person.prototype.calcAge = function () {
+  return Date.now() - Date.UTC(1988, 9, 9, 0, 0, 0, 0);
+};
+
+console.log(jack.calcAge());
+
+// Person.prototype is not the prototype of Person, but for all the instances
+// We can set a property on a prototype, but it won't be 'own property
