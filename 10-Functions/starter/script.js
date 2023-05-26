@@ -53,3 +53,71 @@ transformer('And sdkjhf', oneWord);
 // addEvenListener is a higher-order function;
 // JS doesn't support classes as such, as blueprints
 // OOP principles Abstraction, Encapsulation, Inheritance and Polymorphism improve class design
+const lufthansa = {
+  airline: 'Lufthansa',
+  iataCode: 'LH',
+  bookings: [],
+  book(flightNum, name) {
+    console.log(
+      `${name} booked a seat on ${this.airline} flight ${this.iataCode}${flightNum}`
+    );
+    this.bookings.push({ flight: `${this.iataCode}${flightNum}`, name });
+  },
+};
+
+lufthansa.book(239, 'Jonas Schmedtmann');
+lufthansa.book(973, 'Sasha Shipilova');
+// 'this' points to new lufthansa object
+
+const eurowings = {
+  airline: 'Eurowings',
+  iataCode: 'EW',
+  bookings: [],
+};
+const book = lufthansa.book;
+
+//'this' in functions points to undefined
+// call, apply and bind are all function methods which set the function's 'this' keyword
+// a function in JS is really just an object
+book.call(eurowings, 23, 'Sarah Williams');
+console.log(eurowings.bookings);
+
+const swiss = {
+  airline: 'Swiss',
+  iataCode: 'SW',
+  bookings: [],
+};
+
+book.apply(swiss, [4646, 'Mary Lady']);
+
+// bind method creates the function for each object instance
+const bookEW = book.bind(eurowings);
+const bookEW23 = book.bind(eurowings, 23);
+// partial application
+bookEW23('Ronaldo');
+
+// We can always use call PaymentMethodChangeEvent. If we need, we can spread
+
+lufthansa.planes = 300;
+lufthansa.buyPlane = function () {
+  console.log(this);
+  this.planes++;
+  console.log(this.planes);
+};
+document
+  .querySelector('.buy')
+  .addEventListener('click', lufthansa.buyPlane.bind(lufthansa));
+
+const addTax = (rate, value) => value + value * rate;
+console.log(addTax(0.1, 200));
+const addVAT = addTax.bind(null, 0.23);
+// this is because there is no 'this' keyword in this function. But we are setting the default value
+console.log(addVAT(100));
+
+function addVAT1(vat) {
+  return function addTax(value) {
+    return value + value * vat;
+  };
+}
+const addVAT24 = addVAT1(0.24);
+console.log(addVAT24(100));

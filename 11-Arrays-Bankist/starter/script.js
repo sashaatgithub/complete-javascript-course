@@ -131,3 +131,5 @@ greet('Hello and be happy')('Sasha');
 const greeter = greeting => shortName =>
   console.log(`${greeting}, ${shortName}`);
 greeter('Wake up')('Sasha');
+
+// Call and apply, setting 'this' manually
