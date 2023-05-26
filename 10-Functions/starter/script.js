@@ -50,4 +50,4 @@ const transformer = function (str, fn) {
 transformer('And sdkjhf', oneWord);
 // Callback functions are important because they allow for abstraction.
 
-addEvenListener;
+// addEvenListener is a higher-order function;
