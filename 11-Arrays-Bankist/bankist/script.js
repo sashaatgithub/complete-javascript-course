@@ -91,10 +91,15 @@ console.log(movementsUSDArrow);
 
 // forEach method has a side effect, and map method doesn't
 
-const user = 'Alexandra Velikova';
-const username = user
-  .toLowerCase()
-  .split(' ')
-  .map(word => word[0])
-  .join('');
-console.log(username);
+const user1 = 'Alexandra Velikova';
+const createUsernames = function (accs) {
+  accs.forEach(function (acc) {
+    acc.username = acc.owner
+      .toLowerCase()
+      .split(' ')
+      .map(word => word[0])
+      .join('');
+  });
+};
+createUsernames(accounts);
+console.log(accounts);
