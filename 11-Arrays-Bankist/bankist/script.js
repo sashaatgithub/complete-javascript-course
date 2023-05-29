@@ -103,3 +103,8 @@ const createUsernames = function (accs) {
 };
 createUsernames(accounts);
 console.log(accounts);
+
+function deposits(movements) {
+  return movements.filter(movement => movement > 0);
+}
+console.log(deposits(accounts[2].movements));
