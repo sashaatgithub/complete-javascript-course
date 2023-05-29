@@ -53,7 +53,7 @@ function toggleResults() {
   document.querySelector('.answers').classList.toggle('hidden');
 }
 
-// Immediately invoked functions - a pattern. It is important for hiding variables.
+// Immediately invoked functions - a pattern. It is important for hiding variables. Was very useful before the invention of const and let
 (function () {
   console.log('this will never run again');
 })();
