@@ -60,37 +60,20 @@ const inputLoanAmount = document.querySelector('.form__input--loan-amount');
 const inputCloseUsername = document.querySelector('.form__input--user');
 const inputClosePin = document.querySelector('.form__input--pin');
 
-/////////////////////////////////////////////////
-/////////////////////////////////////////////////
-// LECTURES
-
-const currencies = new Map([
-  ['USD', 'United States dollar'],
-  ['EUR', 'Euro'],
-  ['GBP', 'Pound sterling'],
-]);
-
-const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
-
-currencies.forEach(function (value, key, map) {
-  console.log(`${key}:${value}`);
-});
-// For maps we should use a throw-away value _
-/////////////////////////////////////////////////
-const greet = function (greeting) {
-  return function (name) {
-    console.log(`${greeting}, ${name}`);
-  };
+const displayMovements = function (movements) {
+  movements.forEach(function (mov, i) {
+    let inOrOut;
+    inOrOut = mov < 0 ? 'withdrawal' : 'deposit';
+    let divText = `<div class="movements__row">
+  <div class="movements__type movements__type--${inOrOut}"> ${
+      i + 1
+    } ${inOrOut.toUpperCase()}</div>
+  <div class="movements__value">${mov}</div>
+</div>`;
+    containerMovements.insertAdjacentHTML('afterbegin', divText);
+  });
 };
-// const greeterHey:(name: any) => void
-const greeterHey = greet('Hey');
-greeterHey('Jonas');
-greeterHey('Sasha');
 
-greet('Hello and be happy')('Sasha');
-
-const greeter = greeting => shortName =>
-  console.log(`${greeting}, ${shortName}`);
-greeter('Wake up')('Sasha');
-
-// Call and apply, setting 'this' manually
+displayMovements(account1.movements);
+/////////////////////////////////////////////////
+/////////////////////////////////////////////////
