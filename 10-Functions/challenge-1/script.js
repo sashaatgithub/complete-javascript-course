@@ -61,3 +61,28 @@ function toggleResults() {
 (() => {
   console.log('this neither');
 })();
+
+// JS closure;
+const secureBooking = function () {
+  let passengerCount = 0;
+  return function () {
+    passengerCount++;
+    console.log(`${passengerCount} passengers`);
+  };
+};
+const booker = secureBooking();
+booker();
+booker();
+booker();
+console.dir(booker);
+// The scopes here explicitly says 'closure'
+// Closure makes a function remember everything at the function's birthplace. Always has access to the variable environment of the scope at time of its creation. The scope is preserved through the closure.
+// Closure has PRIORITY over the scope chain. The function can manipulate it. We cannot even access closed-over variables explicitly. We can just observe that a closure happens
+
+(function () {
+  const header = document.querySelector('h1');
+  header.style.color = 'red';
+  document
+    .querySelector('body')
+    .addEventListener('click', () => (header.style.color = 'blue'));
+})();
