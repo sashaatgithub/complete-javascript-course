@@ -52,3 +52,12 @@ function toggleResults() {
   createResultsDisplay();
   document.querySelector('.answers').classList.toggle('hidden');
 }
+
+// Immediately invoked functions - a pattern. It is important for hiding variables.
+(function () {
+  console.log('this will never run again');
+})();
+
+(() => {
+  console.log('this neither');
+})();
