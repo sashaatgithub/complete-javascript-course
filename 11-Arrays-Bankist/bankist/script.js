@@ -82,6 +82,20 @@ function calculateBalance(movements){
   labelBalance.textContent = balance;
 }
 calculateBalance(account1.movements);
+
+function calculateAllDeposits(movements){
+  const deposits = movements.filter((curr,i,arr) => curr > 0);
+  labelSumIn.textContent = deposits.reduce((acc, curr)=>acc+curr,0);
+}
+
+calculateAllDeposits(account1.movements);
+
+function calculateAllWithdrawals(movements){
+  const withdrawals = movements.filter((curr,i,arr) => curr < 0);
+  labelSumOut.textContent = deposits.reduce((acc, curr)=>acc+curr,0);
+}
+
+calculateAllWithdrawals(account1.movements);
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
 const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
@@ -114,3 +128,4 @@ function deposits(movements) {
   return movements.filter(movement => movement > 0);
 }
 console.log(deposits(accounts[2].movements));
+const max = movements.reduceRight((acc, mov) => {if (acc>mov) {return acc} else {return mov}}, movements[0]);
