@@ -83,7 +83,7 @@ containerApp.style.opacity = 100;
   }
 function updateData(account){
   displayMovements(account.movements);
-  calculateBalance(account.movements);
+  calculateBalance(account);
   calculateAllDeposits(account.movements);
   calculateAllWithdrawals(account.movements);
 }
@@ -104,9 +104,11 @@ const displayMovements = function (movements) {
 };
 
 
-function calculateBalance(movements){
+function calculateBalance(account){
+  const movements = account.movements;
   const balance = movements.reduce((acc,curr) => acc+curr,0);
   labelBalance.textContent = balance;
+  account.balance = balance;
 }
 
 function calculateAllDeposits(movements){
