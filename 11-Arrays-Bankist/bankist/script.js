@@ -32,7 +32,7 @@ const account4 = {
   pin: 4444,
 };
 
-const accounts = [account1, account2, account3, account4];
+let accounts = [account1, account2, account3, account4];
 
 // Elements
 const labelWelcome = document.querySelector('.welcome');
@@ -60,6 +60,34 @@ const inputLoanAmount = document.querySelector('.form__input--loan-amount');
 const inputCloseUsername = document.querySelector('.form__input--user');
 const inputClosePin = document.querySelector('.form__input--pin');
 
+const createUsernames = function (accs) {
+  accs.forEach(function (acc) {
+    acc.username = acc.owner
+      .toLowerCase()
+      .split(' ')
+      .map(word => word[0])
+      .join('');
+  });
+};
+createUsernames(accounts);
+
+function shouldHaveAccess(username, pin){
+return accounts.find(acc => acc?.username === username)?.pin === pin;
+}
+function getAccount(username){
+  return accounts.find(acc => acc?.username === username);
+  }
+
+function showUI(){
+containerApp.style.opacity = 100;
+  }
+function updateData(account){
+  displayMovements(account.movements);
+  calculateBalance(account.movements);
+  calculateAllDeposits(account.movements);
+  calculateAllWithdrawals(account.movements);
+}
+
 const displayMovements = function (movements) {
   containerMovements.innerHTML = '';
   movements.forEach(function (mov, i) {
@@ -75,13 +103,11 @@ const displayMovements = function (movements) {
   });
 };
 
-displayMovements(account1.movements);
 
 function calculateBalance(movements){
   const balance = movements.reduce((acc,curr) => acc+curr,0);
   labelBalance.textContent = balance;
 }
-calculateBalance(account1.movements);
 
 function calculateAllDeposits(movements){
   const deposits = movements
@@ -90,7 +116,6 @@ function calculateAllDeposits(movements){
   labelSumIn.textContent = `${deposits}€`;
 }
 
-calculateAllDeposits(account1.movements);
 
 function calculateAllWithdrawals(movements){
   const withdrawals = movements
@@ -99,9 +124,24 @@ function calculateAllWithdrawals(movements){
   labelSumOut.textContent = `${Math.abs(withdrawals)}€`;
 }
 
-calculateAllWithdrawals(account1.movements);
+btnLogin.addEventListener('click',function(e){
+  e.preventDefault();
+  giveAccessToAccount();
+});
+
+function giveAccessToAccount(){
+  const username = inputLoginUsername.value;
+  const pin = Number(inputLoginPin.value);
+  if(shouldHaveAccess(username, pin)){
+    const account = getAccount(username);
+    updateData(account);
+    showUI();
+  }
+}
+
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
+// LECTURES
 const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 const eurToUsd = 1.1;
 const movementsUSD = movements.map(function (movement) {
@@ -116,15 +156,7 @@ console.log(movementsUSDArrow);
 // forEach method has a side effect, and map method doesn't
 
 const user1 = 'Alexandra Velikova';
-const createUsernames = function (accs) {
-  accs.forEach(function (acc) {
-    acc.username = acc.owner
-      .toLowerCase()
-      .split(' ')
-      .map(word => word[0])
-      .join('');
-  });
-};
+
 createUsernames(accounts);
 console.log(accounts);
 
@@ -133,3 +165,10 @@ function deposits(movements) {
 }
 console.log(deposits(accounts[2].movements));
 const max = movements.reduceRight((acc, mov) => {if (acc>mov) {return acc} else {return mov}}, movements[0]);
+
+// Filter returns an array and find returns only one element
+const firstWithdrawal = movements.find(mov => mov<0);
+console.log(firstWithdrawal);
+const jessicasAccount = accounts.find(acc => acc.owner === 'Jessica Davis');
+console.log(jessicasAccount);
+
