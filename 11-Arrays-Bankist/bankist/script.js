@@ -84,15 +84,19 @@ function calculateBalance(movements){
 calculateBalance(account1.movements);
 
 function calculateAllDeposits(movements){
-  const deposits = movements.filter((curr,i,arr) => curr > 0);
-  labelSumIn.textContent = deposits.reduce((acc, curr)=>acc+curr,0);
+  const deposits = movements
+  .filter((curr,i,arr) => curr > 0)
+  .reduce((acc, curr)=>acc+curr,0);
+  labelSumIn.textContent = `${deposits}€`;
 }
 
 calculateAllDeposits(account1.movements);
 
 function calculateAllWithdrawals(movements){
-  const withdrawals = movements.filter((curr,i,arr) => curr < 0);
-  labelSumOut.textContent = deposits.reduce((acc, curr)=>acc+curr,0);
+  const withdrawals = movements
+  .filter((curr,i,arr) => curr < 0)
+  .reduce((acc, curr)=>acc+curr,0);
+  labelSumOut.textContent = `${Math.abs(withdrawals)}€`;
 }
 
 calculateAllWithdrawals(account1.movements);
