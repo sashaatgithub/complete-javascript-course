@@ -77,7 +77,7 @@ const displayMovements = function (movements) {
 
 displayMovements(account1.movements);
 
-// Test
+// Test2
 console.log(account1.movements);
 
 /////////////////////////////////////////////////
