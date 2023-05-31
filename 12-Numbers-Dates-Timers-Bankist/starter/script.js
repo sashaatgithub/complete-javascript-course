@@ -80,6 +80,9 @@ const inputClosePin = document.querySelector('.form__input--pin');
 
 /////////////////////////////////////////////////
 // Functions
+let now = new Date();
+labelDate.textContent = `${now.getDate()}`.padStart(2, 0)+`/`+`${now.getMonth()+1}`.padStart(2, 0)+`/${now.getFullYear()}`;
+
 
 const displayMovements = function (movements, sort = false) {
   containerMovements.innerHTML = '';
@@ -154,6 +157,12 @@ const updateUI = function (acc) {
 ///////////////////////////////////////
 // Event handlers
 let currentAccount;
+
+// FAKE ALWAYS LOGGED IN
+currentAccount = account1;
+updateUI(currentAccount);
+containerApp.style.opacity = 100;
+// END OF FAKE LOGIN
 
 btnLogin.addEventListener('click', function (e) {
   // Prevent form from submitting
