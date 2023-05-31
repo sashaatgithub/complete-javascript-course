@@ -206,3 +206,37 @@ console.log(movementsMutated);
 console.log(movements);
 // Return 0 - position remains the same
 
+// Creating and filling arrays programmatically
+
+const newArr = new Array(10).fill(1,1,9);
+console.log(newArr);
+Array.from({length:7}, () => 1);
+const z = Array.from({length: 7}, (_,i)=> i+1);
+console.log(z);
+function movementsInThousands(){
+const movementsUI = Array.from(document.querySelectorAll('.movements__value')
+, el => Number(el.innerText)/1000
+);
+console.log(movementsUI);
+}
+
+document.querySelector('body').addEventListener('click', movementsInThousands);
+// ++ increments a value but returns the original value;
+
+
+function depositsOrWithdrawalsSum(arr, choosePositive) {
+  const depositsOrWithDrawals = choosePositive ? arr.filter(el => el>0)  : arr.filter(el => el<0);
+  return depositsOrWithDrawals.reduce((acc, curr) => acc + curr);
+}
+console.log(depositsOrWithdrawalsSum (account1.movements, true));
+console.log(depositsOrWithdrawalsSum (account1.movements, false));
+
+const {deposits, withdrawals} = accounts
+.flatMap(acc => acc.movements)
+.reduce((sums, curr) => {
+  sums[curr > 0 ? 'deposits' : 'withdrawals'] += curr;
+  return sums;
+},
+{deposits: 0, withdrawals: 0});
+
+
