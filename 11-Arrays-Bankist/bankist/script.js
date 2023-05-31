@@ -60,6 +60,8 @@ const inputLoanAmount = document.querySelector('.form__input--loan-amount');
 const inputCloseUsername = document.querySelector('.form__input--user');
 const inputClosePin = document.querySelector('.form__input--pin');
 
+let currentAccount;
+
 const createUsernames = function (accs) {
   accs.forEach(function (acc) {
     acc.username = acc.owner
@@ -81,16 +83,17 @@ function getAccount(username){
 function showUI(){
 containerApp.style.opacity = 100;
   }
-function updateData(account){
-  displayMovements(account.movements);
-  calculateBalance(account);
-  calculateAllDeposits(account.movements);
-  calculateAllWithdrawals(account.movements);
+
+function sortAsc(movements){
+  // ascending sort to achieve display in descending order because display is reversed from top to bottom
+  const movementsCopy = movements.slice();
+  return movementsCopy.sort((a,b) => a-b);
 }
 
-const displayMovements = function (movements) {
+const displayMovements = function (movements, sort = false) {
+  const movs = sort ? sortAsc(movements) : movements;
   containerMovements.innerHTML = '';
-  movements.forEach(function (mov, i) {
+  movs.forEach(function (mov, i) {
     let inOrOut;
     inOrOut = mov < 0 ? 'withdrawal' : 'deposit';
     let divText = `<div class="movements__row">
@@ -102,6 +105,11 @@ const displayMovements = function (movements) {
     containerMovements.insertAdjacentHTML('afterbegin', divText);
   });
 };
+
+btnSort.addEventListener('click',function(e){
+  e.preventDefault();
+  displayMovements(currentAccount.movements, true);
+})
 
 
 function calculateBalance(account){
@@ -131,15 +139,23 @@ btnLogin.addEventListener('click',function(e){
   giveAccessToAccount();
 });
 
+function updateData(account){
+  displayMovements(account.movements);
+  calculateBalance(account);
+  calculateAllDeposits(account.movements);
+  calculateAllWithdrawals(account.movements);
+}
+
 function giveAccessToAccount(){
   const username = inputLoginUsername.value;
   const pin = Number(inputLoginPin.value);
   if(shouldHaveAccess(username, pin)){
-    const account = getAccount(username);
-    updateData(account);
+    currentAccount = getAccount(username);
+    updateData(currentAccount);
     showUI();
   }
 }
+
 
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
@@ -173,4 +189,18 @@ const firstWithdrawal = movements.find(mov => mov<0);
 console.log(firstWithdrawal);
 const jessicasAccount = accounts.find(acc => acc.owner === 'Jessica Davis');
 console.log(jessicasAccount);
+// return<0, A, B
+// return > 0, B, A
+// To sort in the ascending order, we need to return something greater than zero if A is bigger thab B
+// ascending order. Array is mutated
+const movementsMutated = [...movements];
+movementsMutated.sort((a,b) => a-b);
+console.log(movementsMutated);
+console.log(movements);
+
+// descending order. Array is mutated
+movementsMutated.sort((a,b)=> b-a)
+console.log(movementsMutated);
+console.log(movements);
+// Return 0 - position remains the same
 
