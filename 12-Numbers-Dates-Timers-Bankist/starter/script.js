@@ -164,7 +164,7 @@ btnLogin.addEventListener('click', function (e) {
   );
   console.log(currentAccount);
 
-  if (currentAccount?.pin === Number(inputLoginPin.value)) {
+  if (currentAccount?.pin === +(inputLoginPin.value)) {
     // Display UI and message
     labelWelcome.textContent = `Welcome back, ${
       currentAccount.owner.split(' ')[0]
@@ -182,7 +182,7 @@ btnLogin.addEventListener('click', function (e) {
 
 btnTransfer.addEventListener('click', function (e) {
   e.preventDefault();
-  const amount = Number(inputTransferAmount.value);
+  const amount = +(inputTransferAmount.value);
   const receiverAcc = accounts.find(
     acc => acc.username === inputTransferTo.value
   );
@@ -206,7 +206,7 @@ btnTransfer.addEventListener('click', function (e) {
 btnLoan.addEventListener('click', function (e) {
   e.preventDefault();
 
-  const amount = Number(inputLoanAmount.value);
+  const amount = +(inputLoanAmount.value);
 
   if (amount > 0 && currentAccount.movements.some(mov => mov >= amount * 0.1)) {
     // Add movement
@@ -248,6 +248,39 @@ btnSort.addEventListener('click', function (e) {
   sorted = !sorted;
 });
 
+// changing background
+// labelBalance.addEventListener('click', function(){
+// [...document.querySelectorAll('.movements__row')]
+// .forEach(function(row, i){
+// if(i % 2 === 0) row.style.backgroundColor = 'blue';  
+// })});
+
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
 // LECTURES
+console.log(Number.parseFloat('  2.1k'));
+console.log(Number.isFinite('r'));
+console.log(Number.isFinite(1/0));
+console.log(8 ** (1/3));
+console.log(Math.min(5, 18, Number.parseFloat("3.33p")));
+
+const randomInt = (min, max) => Math.floor(Math.random() *(max - min) + 1) + min;
+console.log(randomInt(10,20));
+// toFixed - to String
+
+console.log(new Date("December 24, 2015"));
+// strings created by JS can be converted to date safely
+console.log();
+const givenDate = Date.now('2019-11-01T13:15:33.035Z');
+// Month in JS is zero-based
+
+console.log(new Date(2000,11,31,3,3,3,0));
+
+// This is a timestamp, not a date
+console.log(Date.now());
+
+
+
+
+
+
