@@ -80,9 +80,6 @@ const inputClosePin = document.querySelector('.form__input--pin');
 
 /////////////////////////////////////////////////
 // Functions
-let now = new Date();
-labelDate.textContent = `${now.getDate()}`.padStart(2, 0)+`/`+`${now.getMonth()+1}`.padStart(2, 0)+`/${now.getFullYear()}`;
-
 
 const displayMovements = function (movements, sort = false) {
   containerMovements.innerHTML = '';
@@ -94,9 +91,8 @@ const displayMovements = function (movements, sort = false) {
 
     const html = `
       <div class="movements__row">
-        <div class="movements__type movements__type--${type}">${
-      i + 1
-    } ${type}</div>
+        <div class="movements__type movements__type--${type}">${i + 1
+      } ${type}</div>
         <div class="movements__value">${mov}€</div>
       </div>
     `;
@@ -158,12 +154,6 @@ const updateUI = function (acc) {
 // Event handlers
 let currentAccount;
 
-// FAKE ALWAYS LOGGED IN
-currentAccount = account1;
-updateUI(currentAccount);
-containerApp.style.opacity = 100;
-// END OF FAKE LOGIN
-
 btnLogin.addEventListener('click', function (e) {
   // Prevent form from submitting
   e.preventDefault();
@@ -172,12 +162,11 @@ btnLogin.addEventListener('click', function (e) {
     acc => acc.username === inputLoginUsername.value
   );
   console.log(currentAccount);
-
+  labelDate.textContent = new Intl.DateTimeFormat(currentAccount.locale, options1).format(new Date());
   if (currentAccount?.pin === +(inputLoginPin.value)) {
     // Display UI and message
-    labelWelcome.textContent = `Welcome back, ${
-      currentAccount.owner.split(' ')[0]
-    }`;
+    labelWelcome.textContent = `Welcome back, ${currentAccount.owner.split(' ')[0]
+      }`;
     containerApp.style.opacity = 100;
 
     // Clear input fields
@@ -188,6 +177,7 @@ btnLogin.addEventListener('click', function (e) {
     updateUI(currentAccount);
   }
 });
+
 
 btnTransfer.addEventListener('click', function (e) {
   e.preventDefault();
@@ -257,6 +247,17 @@ btnSort.addEventListener('click', function (e) {
   sorted = !sorted;
 });
 
+let now = new Date();
+// labelDate.textContent = `${now.getDate()}`.padStart(2, 0) + `/` + `${now.getMonth() + 1}`.padStart(2, 0) + `/${now.getFullYear()}`;
+const options1 = {
+  hour: 'numeric',
+  minute: 'numeric',
+  day: '2-digit',
+  month: 'long',
+  year: 'numeric'
+}
+
+
 // changing background
 // labelBalance.addEventListener('click', function(){
 // [...document.querySelectorAll('.movements__row')]
@@ -267,14 +268,14 @@ btnSort.addEventListener('click', function (e) {
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
 // LECTURES
-console.log(Number.parseFloat('  2.1k'));
+/* console.log(Number.parseFloat('  2.1k'));
 console.log(Number.isFinite('r'));
-console.log(Number.isFinite(1/0));
-console.log(8 ** (1/3));
+console.log(Number.isFinite(1 / 0));
+console.log(8 ** (1 / 3));
 console.log(Math.min(5, 18, Number.parseFloat("3.33p")));
 
-const randomInt = (min, max) => Math.floor(Math.random() *(max - min) + 1) + min;
-console.log(randomInt(10,20));
+const randomInt = (min, max) => Math.floor(Math.random() * (max - min) + 1) + min;
+console.log(randomInt(10, 20));
 // toFixed - to String
 
 console.log(new Date("December 24, 2015"));
@@ -283,10 +284,33 @@ console.log();
 const givenDate = Date.now('2019-11-01T13:15:33.035Z');
 // Month in JS is zero-based
 
-console.log(new Date(2000,11,31,3,3,3,0));
+console.log(new Date(2000, 11, 31, 3, 3, 3, 0));*/
 
 // This is a timestamp, not a date
 console.log(Date.now());
+// This is a date
+const future = new Date(2037, 10, 19, 15, 23);
+console.log(future);
+
+const calcDaysPassed = (date1, date2) => Math.abs(date2 - date1) / (1000 * 60 * 60 * 24);
+const days1 = calcDaysPassed(new Date(2037, 3, 4), new Date(2037, 3, 14));
+console.log(days1);
+
+// Precise calculations incl daylight savings - moment.js
+
+// create a new formatter
+const now1 = new Date();
+const options = {
+  hour: 'numeric',
+  minute: 'numeric',
+  day: '2-digit',
+  month: 'long',
+  year: 'numeric'
+}
+labelDate.textContent = new Intl.DateTimeFormat('en-US', options).format(now1);
+
+const locale = navigator.language;
+console.log(locale);
 
 
 
