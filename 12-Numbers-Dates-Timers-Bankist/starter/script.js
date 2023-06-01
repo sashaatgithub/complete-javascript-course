@@ -154,6 +154,31 @@ const updateUI = function (acc) {
 // Event handlers
 let currentAccount;
 
+const options1 = {
+  hour: 'numeric',
+  minute: 'numeric',
+  day: '2-digit',
+  month: 'long',
+  year: 'numeric'
+}
+let loginTime;
+let logoutInterval;
+
+function logout() {
+  containerApp.style.opacity = 0;
+  clearInterval(logoutInterval);
+}
+
+const sessionLengthMins = 5;
+
+function logoutMinutesAndSeconds(timeNow, loginTime) {
+  const remainingTimeInMiliS = sessionLengthMins * 60 * 1000 - (timeNow - loginTime);
+  const remainingTimeInS = Math.floor(remainingTimeInMiliS / 1000);
+  const fullMinsTillLogout = Math.floor(remainingTimeInS / 60);
+  const fullSTillLogout = Math.floor(remainingTimeInS % 60);
+  return `${fullMinsTillLogout}:${fullSTillLogout}`;
+}
+
 btnLogin.addEventListener('click', function (e) {
   // Prevent form from submitting
   e.preventDefault();
@@ -162,11 +187,12 @@ btnLogin.addEventListener('click', function (e) {
     acc => acc.username === inputLoginUsername.value
   );
   console.log(currentAccount);
-  labelDate.textContent = new Intl.DateTimeFormat(currentAccount.locale, options1).format(new Date());
+
   if (currentAccount?.pin === +(inputLoginPin.value)) {
     // Display UI and message
-    labelWelcome.textContent = `Welcome back, ${currentAccount.owner.split(' ')[0]
-      }`;
+    labelWelcome.textContent = `Welcome back, ${currentAccount.owner.split(' ')[0]}`;
+    loginTime = new Date();
+    labelDate.textContent = new Intl.DateTimeFormat(currentAccount.locale, options1).format(loginTime);
     containerApp.style.opacity = 100;
 
     // Clear input fields
@@ -175,6 +201,9 @@ btnLogin.addEventListener('click', function (e) {
 
     // Update UI
     updateUI(currentAccount);
+    logoutInterval = setInterval(() => document.querySelector('.timer').textContent
+      = logoutMinutesAndSeconds(new Date(), loginTime), 1000);
+    setTimeout(() => logout(), sessionLengthMins * 60 * 1000 - 1);
   }
 });
 
@@ -249,18 +278,11 @@ btnSort.addEventListener('click', function (e) {
   sorted = !sorted;
 });
 
-let now = new Date();
-// labelDate.textContent = `${now.getDate()}`.padStart(2, 0) + `/` + `${now.getMonth() + 1}`.padStart(2, 0) + `/${now.getFullYear()}`;
-const options1 = {
-  hour: 'numeric',
-  minute: 'numeric',
-  day: '2-digit',
-  month: 'long',
-  year: 'numeric'
-}
 
 
-// changing background
+
+
+// changing background to stripes
 // labelBalance.addEventListener('click', function(){
 // [...document.querySelectorAll('.movements__row')]
 // .forEach(function(row, i){
@@ -331,6 +353,11 @@ console.log('waiting');
 
 // The timer can be cancelled before it runs out
 if (ingr1 === 'beans') clearTimeout(soupTimer);
+
+// setInterval(function () {
+//   const now2 = new Date();
+//   console.log(now2);
+// }, 1000);
 
 
 
