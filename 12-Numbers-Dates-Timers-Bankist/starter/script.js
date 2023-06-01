@@ -312,8 +312,23 @@ labelDate.textContent = new Intl.DateTimeFormat('en-US', options).format(now1);
 const locale = navigator.language;
 console.log(locale);
 
+const num = 3884764.23;
+console.log('US: ', new Intl.NumberFormat('en-US').format(num));
+console.log('DE: ', new Intl.NumberFormat('de-DE').format(num));
+console.log('BG: ', new Intl.NumberFormat('bg-BG').format(num));
 
+// setTimeout timer runs once only
+// setInterval timer runs until we stop it
 
+const ingr1 = 'broccoli';
+const soupTimer = setTimeout((ingr => console.log(`Here is your soup with ${ingr}`)), 3 * 1000, ingr1);
+console.log('waiting');
+
+// setting timer doesn't stop code execution
+// Arguments which will be used after the delay are simply arguments to the function entered in the end of the function;
+
+// The timer can be cancelled before it runs out
+if (ingr1 === 'beans') clearTimeout(soupTimer);
 
 
 
