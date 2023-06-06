@@ -31,3 +31,46 @@ console.log(jack.calcAge());
 
 // Person.prototype is not the prototype of Person, but for all the instances
 // We can set a property on a prototype, but it won't be 'own' property
+
+console.log(jonas.__proto__);
+
+console.log(jonas.__proto__.__proto__);
+
+console.log(jonas.__proto__.__proto__.__proto__);
+console.log(Person.prototype.constructor);
+const arr = [1, 2]
+console.log(arr.__proto__ === Array.prototype);
+
+Array.prototype.unique = function () {
+  return [...new Set(this)];
+}
+
+// don't get used to adding methods to built-in objects, it leads to bugs in projects
+// The prototype of element is Node
+
+// class declaration
+class PersonCl {
+  // the method needs to be called constructor
+  constructor(firstName, birthYear) {
+    this.firstName = String(firstName).toUpperCase;
+    this.birthYear = birthYear;
+    this.becomesAdultIn = Number(birthYear) + 18;
+  }
+  // this is syntactic sugar on top of creating functions in a prototypes 
+  calcAge() {
+    return 2023 - this.birthYear;
+  }
+}
+
+const katja = new PersonCl("Katja", 2018);
+console.log(katja.becomesAdultIn, katja.birthYear, katja.calcAge());
+
+
+// All the methods written outside the constructor, they become methods of the object prototype
+// class expression
+// PersonCl = class {
+// }
+// behind the scenes classes are still functions in JS
+
+// _ in front of a variable name shows the team that a property shoulldn't be touched outside the class
+// JavaScript is moving away from functions towards OOP. There is a proposal for 'class fields'
