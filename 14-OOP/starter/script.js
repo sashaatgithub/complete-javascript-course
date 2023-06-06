@@ -74,3 +74,9 @@ console.log(katja.becomesAdultIn, katja.birthYear, katja.calcAge());
 
 // _ in front of a variable name shows the team that a property shoulldn't be touched outside the class
 // JavaScript is moving away from functions towards OOP. There is a proposal for 'class fields'
+// #in front of a class field makes it really private in google chrome.
+// they should be defined on top of the class and it's notnecessary to initialize it
+// Static methods are not available on instances
+
+const steven = Object.create(PersonCl);
+// all methods are inherited;
