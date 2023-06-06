@@ -67,5 +67,31 @@ allSections.forEach(function (section) {
   section.classList.add('section--hidden')
 })
 
+// Lazy loading images - only low resolution images are loaded in the beginning,on top there is a filter which makes the images blurred
 
+
+const imgTargets = document.querySelectorAll('img[data-src]');
+
+const loadImg = function (entries, imgObserver) {
+  const [entry] = entries;
+  console.log(entry);
+  if (entry.isIntersecting) return;
+  entry.target.src = entry.target.dataset.src;
+  entry.target.addEventListener('load', function () {
+    entry.target.classList.remove('lazy-img');
+  })
+  imgObserver.unobserve(entry.target);
+}
+const imgObserver = new IntersectionObserver(loadImg, {
+  root: null,
+  threshold: 0,
+  rootMargin: '200px',
+});
+
+
+
+imgTargets.forEach(img => imgObserver.observe(img));
+
+// Style - transform - translate percentage relates to the element's own size
+// Constants can and should be contained in a function which uses them
 
