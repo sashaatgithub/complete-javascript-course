@@ -7,7 +7,7 @@ class CarCl {
     this.speedKmh = speedKmh;
   }
 
-  // Different setters are used for actuallyt setting and changing names;
+  // The setter is used for actually setting and changing names, even if it's not called in the constructor function;
   set make(receivedName) {
     if (receivedName === ' ' || receivedName === '') { alert('Name cannot be empty') }
     else if (!receivedName.match(/[a-zA-Z]+$/)) { alert('Name must be in Latin letters') }
@@ -41,14 +41,19 @@ class CarCl {
   // That's how to make a value unchangeable with getter and setter;
   set vehicleType(_) {
     this._vehicleType = 'car';
+    alert("You cannot change vehicle type")
   }
-
 }
+
+const ferrari = new CarCl('Ferrari', 150);
+// ferrari.vehicleType = 'bike';
+console.log(ferrari);
+
 
 const ford = new CarCl('Ford', 120);
 console.log(ford);
 
-ford.vehicleType = 'bike';
+// ford.vehicleType = 'bike';
 console.log(ford.vehicleType);
 
 
