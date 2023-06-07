@@ -48,22 +48,81 @@ Array.prototype.unique = function () {
 // don't get used to adding methods to built-in objects, it leads to bugs in projects
 // The prototype of element is Node
 
-// class declaration
 class PersonCl {
   // the method needs to be called constructor
-  constructor(firstName, birthYear) {
-    this.firstName = String(firstName).toUpperCase;
+
+  constructor(fullName, birthYear, toys) {
+    this.fullName = fullName;
     this.birthYear = birthYear;
-    this.becomesAdultIn = Number(birthYear) + 18;
+    this.toys = [...toys]
   }
-  // this is syntactic sugar on top of creating functions in a prototypes 
+
+  set fullName(fullName) {
+    console.log(fullName);
+    if (fullName.includes(' ')) {
+      this._fullName = fullName;
+    } else alert('Full name must contain an interval');
+  }
+
+  get fullName() {
+    return this._fullName;
+  }
+
+  get toys() {
+    return [...this.toys];
+  }
+
+  // this is syntactic sugar on top of creating functions in prototypes 
   calcAge() {
     return 2023 - this.birthYear;
   }
+
+  // getters and setters should also be inside of the class
+  get becomesAdultIn() {
+    return this.birthYear + 18;
+  }
 }
 
-const katja = new PersonCl("Katja", 2018);
-console.log(katja.becomesAdultIn, katja.birthYear, katja.calcAge());
+PersonCl.prototype.likes = function (verb) {
+  console.log(`${this.fullName} likes to ${verb}`);
+
+}
+
+const katja = new PersonCl("Katja Velikova", 2018, ['Doll, ball, book']);
+katja.fullName = 'Ekaterina Velikova';
+console.log(katja.fullName, katja.becomesAdultIn, katja.birthYear, katja.calcAge());
+
+katja.likes('sing');
+// katja.toys = ['Gamepad', 'Mobile phone'];
+console.log(katja.toys);
+
+// // The below is not possible
+// class PersonCl {
+//   // the method needs to be called constructor
+
+//   setFullName(fullName) {
+//     if (fullName.includes(' ')) {
+//       this.fullName = fullName;
+//     } else alert('Full name must contain an interval');
+//   }
+
+//   constructor(fullName, birthYear) {
+//     this.fullName = this.setFullName(fullName);
+//     this.birthYear = birthYear;
+//   }
+//   // this is syntactic sugar on top of creating functions in prototypes 
+//   calcAge() {
+//     return 2023 - this.birthYear;
+//   }
+
+
+//   // getters and setters should also be inside of the class
+//   get becomesAdultIn() {
+//     return this.birthYear + 18;
+//   }
+// }
+
+
 
 
 // All the methods written outside the constructor, they become methods of the object prototype

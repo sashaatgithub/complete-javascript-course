@@ -8,17 +8,12 @@ class CarCl {
   // Different setters are used for actuallyt setting and changing names;
   set make(receivedName) {
     if (receivedName === ' ' || receivedName === '') { alert('Name cannot be empty') }
+    else if (!receivedName.match(/[a-zA-Z]+$/)) { alert('Name must be in Latin letters') }
     else {
       this._make = receivedName;
     }
   }
 
-  set changeMake(receivedName) {
-    if (receivedName === ' ' || receivedName === '') { alert('Name cannot be empty') }
-    else {
-      this._make = receivedName;
-    }
-  }
   get make() { return this._make; }
 
   accelerate() {
@@ -46,7 +41,7 @@ console.log(ford.speedMpH());
 ford.brake();
 console.log(ford.speedMpH());
 console.log(ford.make);
-const fusion = new CarCl('F1', 199);
+const fusion = new CarCl('Scoda', 199);
 console.log(fusion);
 console.log(fusion.make);
 
