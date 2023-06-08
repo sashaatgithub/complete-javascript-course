@@ -8,7 +8,8 @@
 // Constructor function needs a this, so it should be a function expression
 
 const Person = function (firstName, birthYear) {
-  (this.firstName = firstName), (this.birthYear = birthYear);
+  this.firstName = firstName;
+  this.birthYear = birthYear;
 };
 // new -> empty object is created 2) this is linked to the empty object
 // 3) this is linked to the prototype 4)automatically returns the object which doesn't have to be empty
@@ -24,9 +25,10 @@ console.log(jonas instanceof Person);
 // Every function has a prototype property, the prototype function too. And we can add methods to it.
 
 Person.prototype.calcAge = function () {
-  return Date.now() - Date.UTC(1988, 9, 9, 0, 0, 0, 0);
+  return Date.now() - Date.UTC(this.birthYear, 9, 9, 0, 0, 0, 0);
 };
 
+/*
 console.log(jack.calcAge());
 
 // Person.prototype is not the prototype of Person, but for all the instances
@@ -51,10 +53,9 @@ Array.prototype.unique = function () {
 class PersonCl {
   // the method needs to be called constructor
 
-  constructor(fullName, birthYear, toys) {
+  constructor(fullName, birthYear) {
     this.fullName = fullName;
     this.birthYear = birthYear;
-    this.toys = [...toys]
   }
 
   set fullName(fullName) {
@@ -66,10 +67,6 @@ class PersonCl {
 
   get fullName() {
     return this._fullName;
-  }
-
-  get toys() {
-    return [...this.toys];
   }
 
   // this is syntactic sugar on top of creating functions in prototypes 
@@ -96,36 +93,8 @@ katja.likes('sing');
 // katja.toys = ['Gamepad', 'Mobile phone'];
 console.log(katja.toys);
 
-// // The below is not possible
-// class PersonCl {
-//   // the method needs to be called constructor
 
-//   setFullName(fullName) {
-//     if (fullName.includes(' ')) {
-//       this.fullName = fullName;
-//     } else alert('Full name must contain an interval');
-//   }
-
-//   constructor(fullName, birthYear) {
-//     this.fullName = this.setFullName(fullName);
-//     this.birthYear = birthYear;
-//   }
-//   // this is syntactic sugar on top of creating functions in prototypes 
-//   calcAge() {
-//     return 2023 - this.birthYear;
-//   }
-
-
-//   // getters and setters should also be inside of the class
-//   get becomesAdultIn() {
-//     return this.birthYear + 18;
-//   }
-// }
-
-
-
-
-// All the methods written outside the constructor, they become methods of the object prototype
+// All the methods written outside the constructor become methods of the object prototype
 // class expression
 // PersonCl = class {
 // }
@@ -135,7 +104,19 @@ console.log(katja.toys);
 // JavaScript is moving away from functions towards OOP. There is a proposal for 'class fields'
 // #in front of a class field makes it really private in google chrome.
 // they should be defined on top of the class and it's notnecessary to initialize it
-// Static methods are not available on instances
+// Static methods are not available on instances, they are not inherited
 
+// all (non-static) methods are inherited;
 const steven = Object.create(PersonCl);
-// all methods are inherited;
+
+*/
+const Student = function (firstName, birthYear, course) {
+  Person.call(this, firstName, birthYear);
+  this.course = course;
+}
+
+Student.prototype.introduce = function () {
+  console.log(`My name is ${this.firstName} and I study ${this.course}.`);
+}
+const mike = new Student('Mike', 2020, 'Computer Science');
+mike.introduce();
