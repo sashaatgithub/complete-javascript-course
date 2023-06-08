@@ -1,5 +1,5 @@
 'use strict';
-
+/*
 // ES6 Classes
 
 // Class expression
@@ -57,5 +57,71 @@ james.calcAge();
 class BabyCl extends PersonCl { };
 const marta = new BabyCl("Marta Mingo", 2021);
 marta.calcAge();
+
+class Account {
+  constructor(owner, currency, pin) {
+    this.owner = owner;
+    this.currency = currency;
+    this.pin = pin;
+    // protected property, not really private
+    this._movements = [];
+    this.locale = navigator.language;
+    console.log(`Thanks for opening an account, ${this.owner}`);
+
+    function deposit(value){
+      this._movements.push(value);
+    }
+
+    function withdrawal(value){
+      this._movements.push(-value);
+    }
+  }
+}
+const acc1 = new Account('Jonas', 'EUR', 1111);
+console.log(acc1);
+acc1.deposit(250);
+acc1.withdrawal(140);
+*/
+
+class Account {
+  // public field (prototype)
+  locale = navigator.language;
+  #movements = [];
+  // 2) Private field (instances)
+  #pin;
+
+  constructor(owner, currency, pin) {
+    this.owner = owner;
+    this.currency = currency;
+    this.#pin = pin;
+    // protected property, not really private
+    // this._movements = [];
+    // this.locale = navigator.language;
+    console.log(`Thanks for opening an account, ${this.owner}`);
+  }
+  // methods in a class don't need 'function' in front of them
+  // public interface
+  getMovements() {
+    return this.#movements;
+  }
+
+  deposit(value) {
+    this.#movements.push(value);
+  }
+
+  withdrawal(value) {
+    this.#movements.push(-value);
+  }
+  // private method
+  #approveLoan(val) {
+    return `The loan ${val} is approved`;
+  }
+}
+// We cannot define fields in a constructor
+
+const acc1 = new Account('JS', 'EUR', 1111)
+console.log(acc1);
+
+
 
 
