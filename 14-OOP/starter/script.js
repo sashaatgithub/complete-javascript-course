@@ -25,7 +25,7 @@ console.log(jonas instanceof Person);
 // Every function has a prototype property, the prototype function too. And we can add methods to it.
 
 Person.prototype.calcAge = function () {
-  return Date.now() - Date.UTC(this.birthYear, 9, 9, 0, 0, 0, 0);
+  return (new Date() - new Date(`${this.birthYear}-01-01`)) / (60 * 1000 * 60 * 24 * 365);
 };
 
 /*
@@ -114,9 +114,18 @@ const Student = function (firstName, birthYear, course) {
   Person.call(this, firstName, birthYear);
   this.course = course;
 }
-
+// Linking prototypes
+Student.prototype = Object.create(Person.prototype);
+Student.prototype.constructor = Student;
 Student.prototype.introduce = function () {
   console.log(`My name is ${this.firstName} and I study ${this.course}.`);
 }
-const mike = new Student('Mike', 2020, 'Computer Science');
+const mike = new Student('Mike', 2002, 'Computer Science');
 mike.introduce();
+console.log(mike.calcAge());
+console.log(mike instanceof Student);
+console.log(mike instanceof Person);
+
+
+
+
