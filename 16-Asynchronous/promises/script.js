@@ -5,8 +5,8 @@ const countriesContainer = document.querySelector('.countries');
 const countriesAPILink = 'https://countries-api-836d.onrender.com/countries'
 ///////////////////////////////////////
 
-function renderCountry(data) {
-    const html = `<article class="country">
+function renderCountry(data, isNeighbour) {
+    const html = `<article class="${isNeighbour ? 'neighbour' : 'country'}">
 <img class="country__img" src="${data.flag}"/>
 <div class="country__data">
   <h3 class="country__name">${data.name}</h3>
@@ -21,11 +21,17 @@ function renderCountry(data) {
     countriesContainer.style.opacity = 1;
 }
 
+const renderError = function (msg) {
+    countriesContainer.insertAdjacentText('beforeend', msg);
+    countriesContainer.style.opacity = 1;
+}
 
 // from fetch, we get a Promise immediately
 function getCountryData(country) {
     const request = fetch(`${countriesAPILink}/name/${country}`)
         .then(response => response.json())
+        // One way of error handling
+        // err => alert(err))
         .then(data => {
             renderCountry(data[0]);
             const neighbour = data[0].borders?.[0];
@@ -33,9 +39,16 @@ function getCountryData(country) {
             return fetch(`${countriesAPILink}/name/${neighbour}`);
         })
         .then(response => response.json())
-        .then(neighbour => renderCountry(neighbour[0]));
+        .then(neighbour => renderCountry(neighbour[0], true))
+        // Errors propagate down the chain until they are caught
+        .catch(err => {
+            console.error(`${err}`);
+            renderError(`Something went wrong. ${err.message}`)
+        })
 };
 
-getCountryData('italy');
+btn.addEventListener('click', function () { getCountryData('italy') });
+
+// The fetch only rejects if the user loses internet connection
 
 
