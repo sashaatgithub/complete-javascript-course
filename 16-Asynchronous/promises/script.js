@@ -43,7 +43,7 @@ function getCountryData(country) {
         .then(data => {
             renderCountry(data[0])
             const neighbour = data[0].borders?.[0];
-            return getJSON(`${countriesAPILink}/name/${neighbour}`, 'Country not found')
+            return getJSON(`${countriesAPILink}/name/${neighbour}`, 'Neighbour country not found')
         })
         .then(neighbour => renderCountry(neighbour[0], true))
         .catch(err => {
@@ -54,7 +54,6 @@ function getCountryData(country) {
         })
 };
 
-btn.addEventListener('click', function () { getCountryData('Italy') });
+btn.addEventListener('click', function () { getCountryData('Australia') });
 
 // fetch function only rejects if the user loses internet connection, or we manually throw an error
-
