@@ -40,26 +40,21 @@ const getJSON = function (url, errorMsg = 'Something went wrong') {
 // from fetch, we get a Promise immediately
 function getCountryData(country) {
     getJSON(`${countriesAPILink}/name/${country}`, 'Country not found')
-        .then(data =>
-            // {
+        .then(data => {
             renderCountry(data[0])
-            // const neighbour = data[0].borders?.[0];
-            // return fetch(`${countriesAPILink}/name/${neighbour}`);
-            // }
-        )
-        // .then(neighbour => renderCountry(neighbour[0], true))
-        // // Errors propagate down the chain until they are caught
+            const neighbour = data[0].borders?.[0];
+            return getJSON(`${countriesAPILink}/name/${neighbour}`, 'Country not found')
+        })
+        .then(neighbour => renderCountry(neighbour[0], true))
         .catch(err => {
-            // Although .msg is suggested, it doesn't work
             renderError(`Something went wrong. ${err.message}`)
         })
         .finally(() => {
-            // Good use case it to hide a loading spinner
             showUI();
         })
 };
 
-btn.addEventListener('click', function () { getCountryData('askdjhf') });
+btn.addEventListener('click', function () { getCountryData('Italy') });
 
 // fetch function only rejects if the user loses internet connection, or we manually throw an error
 
