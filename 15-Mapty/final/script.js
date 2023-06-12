@@ -17,9 +17,8 @@ class Workout {
     // prettier-ignore
     const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
-    this.description = `${this.type[0].toUpperCase()}${this.type.slice(1)} on ${
-      months[this.date.getMonth()]
-    } ${this.date.getDate()}`;
+    this.description = `${this.type[0].toUpperCase()}${this.type.slice(1)} on ${months[this.date.getMonth()]
+      } ${this.date.getDate()}`;
   }
 
   click() {
@@ -231,9 +230,8 @@ class App {
       <li class="workout workout--${workout.type}" data-id="${workout.id}">
         <h2 class="workout__title">${workout.description}</h2>
         <div class="workout__details">
-          <span class="workout__icon">${
-            workout.type === 'running' ? '🏃‍♂️' : '🚴‍♀️'
-          }</span>
+          <span class="workout__icon">${workout.type === 'running' ? '🏃‍♂️' : '🚴‍♀️'
+      }</span>
           <span class="workout__value">${workout.distance}</span>
           <span class="workout__unit">km</span>
         </div>
@@ -323,3 +321,33 @@ class App {
 }
 
 const app = new App();
+
+// Promisifying
+/*
+
+navigator.geolocation.getCurrentPosition(
+  position => console.log(position),
+  err => console.error(err)
+);
+
+console.log('Getting position');
+
+// Same as 
+const getPosition = function () {
+  return new Promise(function (resolve, reject) {
+    navigator.geolocation.getCurrentPosition(
+      position => resolve(position),
+      err => reject(err)
+    );
+  });
+};
+*/
+
+// Same as
+const getPosition = function () {
+  return new Promise(function (resolve, reject) {
+    // Now resolve itself is a callback function, which will get called with Position
+    navigator.geolocation.getCurrentPosition(resolve, reject);
+  });
+};
+getPosition().then(pos => console.log(pos));
