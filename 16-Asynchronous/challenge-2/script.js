@@ -9,3 +9,16 @@ const imgHtml = `<img class="img hidden" src="${imgSrc}"/>`
 document.querySelector('h1').insertAdjacentHTML('beforeend', imgHtml);
 const img = document.querySelector('img');
 img.addEventListener('load', img.classList.remove('hidden'));
+
+// To finish
+const wait = function (seconds) {
+  return new Promise(function (resolve) {
+    setTimeout(resolve, seconds * 1000);
+  })
+};
+
+wait(2)
+  .then(() => {
+    img.classList.add('hidden');
+    return wait(2);
+  });
