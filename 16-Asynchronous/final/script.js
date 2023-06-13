@@ -298,6 +298,7 @@ const lotteryPromise = new Promise(function (resolve, reject) {
 
 lotteryPromise.then(res => console.log(res)).catch(err => console.error(err));
 
+// promiseA.then((val) => console.log("asynchronous logging has val:", val));
 // Promisifying setTimeout
 const wait = function (seconds) {
   return new Promise(function (resolve) {
