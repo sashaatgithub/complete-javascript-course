@@ -60,15 +60,30 @@ const getCountryData = function (country) {
 getCountryData("france");
 */
 
+// The promise doesn't reject on 404 or 403 error
 const getMaximumTemperature = async function () {
-  const result = await fetch(
-    "https://api.open-meteo.com/v1/forecast?latitude=43.42&longitude=28.16&hourly=temperature_2m"
-  );
-  const expectedTemperature = await result.json();
-  const max = await expectedTemperature.hourly.temperature_2m.reduce(
-    (acc, el) => Math.max(acc, Number(el))
-  );
-  console.log(max);
-};
+  let result;
+  try {
+    result = await fetch(
+      "https://api.open-meteo.com/v1/forecast?latitude=43.42&longitude=28.16&hourly=temperature_2m"
+    );
+    console.log(result);
+    if (result.status != 200) {
+      throw new Error("There was an error");
+    }
 
-getMaximumTemperature();
+    const expectedTemperature = await result.json();
+    const max = await expectedTemperature.hourly.temperature_2m.reduce(
+      (acc, el) => Math.max(acc, Number(el))
+    );
+    console.log(max);
+  } catch (error) {
+    alert(error);
+  }
+};
+document
+  .querySelector("button")
+  .addEventListener("click", getMaximumTemperature);
+
+// with async await we can't use .catch because we cannot attach it
+// try-catch from the regular JS can be used for async await functions
