@@ -30,7 +30,9 @@ async function fadeoutTimeoutSec(sec, img) {
   return new Promise(function (resolve) {
     setTimeout(() => {
       img.classList.add('hidden');
-      resolve(img);
+      // a promise doesn't need to have a resolve value, but it needs at least to resolve in one scenario
+      resolve;
+      // resolve(img);
     }, sec * 1000);
   });
 }
