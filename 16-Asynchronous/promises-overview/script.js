@@ -139,3 +139,45 @@ async function getTemperatureData() {
 (async () => {
   console.log(await getTemperatureData());
 })();
+
+// promise combinators
+// returns a promise which takes promises and load them at the same time\
+// short circuits if one promises reject.
+
+(async function () {
+  const res = await Promise.race([
+    getJSON(
+      "https://api.open-meteo.com/v1/forecast?latitude=42.70&longitude=23.32&hourly=temperature_2m"
+    ),
+    fetch(
+      "https://api.open-meteo.com/v1/forecast?latitude=43.42&longitude=28.16&hourly=temperature_2m"
+    ),
+  ]);
+  console.log(res);
+})();
+
+const timeout = function (sec) {
+  return new Promise(function (_, reject) {
+    setTimeout(function () {
+      reject(new Error("Request took too long"));
+    }, sec * 1000);
+  });
+};
+
+Promise.race([
+  getJSON(
+    "https://api.open-meteo.com/v1/forecast?latitude=42.70&longitude=23.32&hourly=temperature_2m"
+  ),
+  timeout(0.1),
+])
+  .then((res) => console.log(res))
+  .catch((err) => console.error(err));
+
+(async function () {
+  const all = await Promise.allSettled([
+    Promise.resolve("Success"),
+    Promise.resolve("Hey"),
+    Promise.reject("OOps"),
+  ]);
+  console.log(all[0].value, all[1].value, all[2].reason);
+})();
