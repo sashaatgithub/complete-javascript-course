@@ -109,8 +109,6 @@ return new Promise(function (resolve, reject) {
 
 
 
-
-
 const whereAmI = async function (country) {
 const res = await fetch(`https://countries-api-836d.onrender.com/countries/name/${country}`)
 }
