@@ -13,18 +13,32 @@ const loadImage = new Promise((resolve, reject) => {
   img.addEventListener('load', resolve(img));
 });
 
-loadImage
-  .then(img => {
-    img.classList.remove('hidden');
-    return img;
-  })
-  .then(img => {
-    console.log('oops');
+// loadImage
+//   .then(img => {
+//     img.classList.remove('hidden');
+//     return img;
+//   })
+//   .then(img => {
+//     console.log('oops');
+//     setTimeout(() => {
+//       img.classList.add('hidden');
+//       return img;
+//     }, 4000);
+//   });
+
+async function fadeoutTimeoutSec(sec, img) {
+  return new Promise(function (resolve) {
     setTimeout(() => {
       img.classList.add('hidden');
-      return img;
-    }, 4000);
+      resolve(img);
+    }, sec * 1000);
   });
+}
+(async function () {
+  const img = await loadImage;
+  img.classList.remove('hidden');
+  await fadeoutTimeoutSec(3, img);
+})();
 
 /*
 const myPromise = new Promise((resolve, reject) => {
