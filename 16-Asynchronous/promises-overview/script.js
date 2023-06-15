@@ -113,3 +113,29 @@ const getMaximumTemperature1 = async function () {
     console.log("Finished getting location");
   }
 })();
+
+// const getJSON = function (url, errorMsg = "Something went wrong") {
+//   return fetch(url).then((response) => {
+//     if (!response.ok) throw new Error(`${errorMsg} ({response.status})`);
+//     return response.json();
+//   });
+// };
+
+async function getJSON(url, errorMsg = "Something went wrong") {
+  const response = await fetch(url);
+  if (!response.ok) throw new Error(`${errorMsg} ({response.status})`);
+  const json = await response.json();
+  console.log(json);
+  return json;
+}
+
+async function getTemperatureData() {
+  const json = await getJSON(
+    "https://api.open-meteo.com/v1/forecast?latitude=43.42&longitude=28.16&hourly=temperature_2m"
+  );
+  const hourly = await json.hourly;
+  return hourly;
+}
+(async () => {
+  console.log(await getTemperatureData());
+})();
