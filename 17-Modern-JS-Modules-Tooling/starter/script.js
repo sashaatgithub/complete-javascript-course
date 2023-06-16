@@ -15,7 +15,7 @@ console.log(`The total number of items in the cart is ${totalQuantity}.`);
 import cost from './shoppingCart.js';
 console.log(cost);
 console.log(cart);
-*/
+
 // But this actually blocks the execution of the entire module! If we have await inside the async function, it only blocks the function.
 const res = await fetch('https://jsonplaceholder.typicode.com/posts');
 const data = await res.json();
@@ -43,3 +43,18 @@ console.log(data);
   };
 })();
 console.log(ShoppingCart2.order);
+*/
+
+import cloneDeep from './node_modules/lodash-es/cloneDeep.js';
+
+const state = {
+  cart: [
+    { product: 'bread', quantity: 5 },
+    { product: 'pizza', quantity: 5 },
+  ],
+  user: { loggedIn: true },
+};
+
+const stateClone = Object.assign({}, state);
+console.log(stateClone);
+state.user.loggedIn = false;
