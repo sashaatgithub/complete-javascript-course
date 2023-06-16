@@ -1,9 +1,10 @@
 import cloneDeep from '../../node_modules/lodash-es/cloneDeep.js';
+import { addToCart } from './shoppingCart.js';
 
 const state = {
   cart: [
-    { product: 'bread', quantity: 5 },
-    { product: 'pizza', quantity: 5 },
+    { product: 'loaves of bread', quantity: 5 },
+    { product: 'pizzas', quantity: 5 },
   ],
   user: { loggedIn: true },
 };
@@ -20,3 +21,5 @@ console.log(stateCloneStructured);
 stateCloneStructured.user.loggedIn = false;
 console.log(stateCloneStructured);
 Object.freeze(stateCloneStructured);
+
+addToCart(state.cart[0].product, 4.5, 3);
