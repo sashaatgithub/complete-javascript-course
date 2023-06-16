@@ -32,3 +32,14 @@ console.log(data);
 // Also works
 // const postWithBiggestId = await getLastPost();
 // console.log(postWithBiggestId);
+
+// The module pattern
+(function ShoppingCart2() {
+  const order = [];
+  let quantity = 0;
+  const orderStock = function (product, quantity) {
+    console.log(`You ordered ${quantity} ${product}`);
+    return { order, quantity };
+  };
+})();
+console.log(ShoppingCart2.order);
